@@ -1,1 +1,2 @@
-web gunicorn downloader.wsgi:appllication --log-file -
+
+web: gunicorn app:manage
