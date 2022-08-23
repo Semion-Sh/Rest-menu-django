@@ -1,1 +1,1 @@
-worker: python yourfile.py
+web gunicorn downloader.wsgi:appllication --log-file -
