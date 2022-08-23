@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Registration
+{% endblock %}
+
+{% block body %}
+<form action="/registration" method="post" class="form-contact">
+    <p><label>Name:</label><input type="text" name="name" value="" required />
+    <p><label>Email:</label><input type="text" name="email" value="" required />
+    <p><label>Password:</label><input type="password" name="psw" value="" required />
+    <p><label>Repeat Password:</label><input type="password" name="psw2" value="" required />
+    <p><input type="submit" value="registration" />
+</form>
+{% endblock %}
