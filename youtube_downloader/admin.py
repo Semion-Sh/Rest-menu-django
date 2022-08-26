@@ -1,24 +1,38 @@
 from django.contrib import admin, messages
-from youtube_downloader.models import Video
+from youtube_downloader.models import Manage, Category
+from django.utils.safestring import mark_safe
+from django import forms
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 
-@admin.register(Video)
-class VideoAdmin(admin.ModelAdmin):
-    list_display = ['photo', 'price', 'title']
+class ManageAdminForm(forms.ModelForm):
+    content = forms.CharField(widget=CKEditorUploadingWidget())
+    class Meta:
+        model = Manage
+        fields = '__all__'
+
+
+@admin.register(Manage)
+class ManageAdmin(admin.ModelAdmin):
+    form = ManageAdminForm
+    save_as = True
+    save_on_top = True
+    list_display = ('title', 'price', 'photo', 'category', 'views', 'add_date')
     list_editable = ['price']
-    ordering = ['price']
-    list_per_page = 2
-    actions = ['set_salle_20']
+    ordering = ['add_date']
     search_fields = ['title']
+    readonly_fields = ('views', 'add_date', 'photoo')
+    list_filter = ('category', )
+    fields = ('title', 'price', 'photo', 'category', 'views', 'add_date', 'photoo')
 
-    def size_status(self, video):
-        if video.price > 4:
-            return 'heavy'
+    def photoo(self, obj):
+        if obj.photo:
+            return mark_safe(f'<img src="{obj.photoo.url}"width=50px>')
+        return '-'
+    photoo.short_description = 'фото'
 
-    # def set_salle_20(self, request: qs: QuerySet):
-    #     qs.update(currency=Video.)
-    #     self.message_user(
-    #         request,
-    #         f'price - 20% DONE'
-    #     )
+
+admin.site.register(Category)
+
+# /Users/mac/Desktop/MyDjandoProjects/downloader/manage.py
 

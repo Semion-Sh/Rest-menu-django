@@ -5,5 +5,11 @@
 
 {% block body %}
     <h1>БАНКЕТНОЕ МЕНЮ</h1>
-
+    <ul>
+        {% for i in banquet %}
+            <li>{{ i.title }} {{ i.price }} {{ i.photo }}</li>
+            <li></li>
+            <li></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

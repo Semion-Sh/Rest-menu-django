@@ -5,5 +5,11 @@
 
 {% block body %}
     <h1>ВИННАЯ КАРТА</h1>
-
+    <ul>
+        {% for i in winne_manage %}
+            <li>{{ i.title }} {{ i.price }} {{ i.photo }}</li>
+            <li></li>
+            <li></li>
+        {% endfor %}
+    </ul>
 {% endblock %}

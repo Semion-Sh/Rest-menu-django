@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from youtube_downloader.views import main, post, Beverages, about_as, videos, download_video, seasonal_menu, banquet_menu, wine_map, Alcoholic
+from youtube_downloader.views import main, post, Beverages, about_as, videos, seasonal_menu, banquet_menu, wine_map, Alcoholic
 
 admin.site.site_header = 'adminka'
 admin.site.index_title = 'adminka'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
     path('', main),
     path('seasonal_menu/', seasonal_menu),
     path('banquet_menu/', banquet_menu),
@@ -31,6 +33,6 @@ urlpatterns = [
     path('about_as/', about_as),
     path('videos/', videos),
     path('videos/', include('youtube_downloader.urls')),
-    path('download_video/', download_video),
+    # path('download_video/', download_video),
     path('video/', include('youtube_downloader.urls')),
 ]
