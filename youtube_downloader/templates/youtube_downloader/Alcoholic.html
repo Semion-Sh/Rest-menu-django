@@ -7,9 +7,9 @@
     <h1>Алкогольное меню</h1>
     <ul>
         {% for i in alcoholic_manage %}
-            <li>{{ i.title }} {{ i.price }} {{ i.photo }}</li>
-            <li></li>
-            <li></li>
+            {% for i in alcoholic_manage %}
+            <li>{{ i.title }} {{ i.price }}<img src="../media/{{ i.photo }}" width="250px" alt="image"></li>
+        {% endfor %}
         {% endfor %}
     </ul>
 

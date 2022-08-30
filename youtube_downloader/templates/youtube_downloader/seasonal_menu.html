@@ -7,9 +7,7 @@
     <h1>Сезонное меню кафе</h1>
     <ul>
         {% for i in seasonal_manages %}
-            <li>{{ i.title }} {{ i.price }} {{ i.photo }}</li>
-            <li></li>
-            <li></li>
+            <li>{{ i.title }} {{ i.price }}<img src="../media/{{ i.photo }}" width="250px" alt="image"></li>
         {% endfor %}
     </ul>
 {% endblock %}

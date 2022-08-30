@@ -18,7 +18,7 @@ def seasonal_menu(request):
 
 
 def banquet_menu(request):
-    banquet = Manage.objects.filter(category=4)
+    banquet = Manage.objects.filter(category=2)
     return HttpResponse(render(request, 'youtube_downloader/banquet_menu.html', {
         'banquet': banquet
     }))
@@ -32,7 +32,7 @@ def wine_map(request):
 
 
 def Alcoholic(request):
-    alcoholic_manage = Manage.objects.filter(category=6)
+    alcoholic_manage = Manage.objects.filter(category=4)
     return HttpResponse(render(request, 'youtube_downloader/Alcoholic.html', {
         'alcoholic_manage': alcoholic_manage
     }))
