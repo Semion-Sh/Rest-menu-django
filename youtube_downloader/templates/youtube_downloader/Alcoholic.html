@@ -5,12 +5,15 @@
 
 {% block body %}
     <h1>Алкогольное меню</h1>
-    <ul>
+    <div class="Portfolio-box branding">
         {% for i in alcoholic_manage %}
-            {% for i in alcoholic_manage %}
-            <li>{{ i.title }} {{ i.price }}<img src="../media/{{ i.photo }}" width="250px" alt="image"></li>
+            <img src="../media/{{ i.photo }}" width="80px" alt="image">
+            <h3>
+            <a href="{% url 'product' i.id %}">
+                {{ i.title }}
+            </a></h3>
+            <p>Цена: {{ i.price }}</p>
         {% endfor %}
-        {% endfor %}
-    </ul>
+    </div>
 
 {% endblock %}

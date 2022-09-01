@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from youtube_downloader.views import main, post, Beverages, about_as, videos, seasonal_menu, banquet_menu, wine_map, Alcoholic
+from youtube_downloader.views import main, post, Product,  Beverages, about_as, videos, seasonal_menu, banquet_menu, wine_map, Alcoholic
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
@@ -31,13 +31,14 @@ urlpatterns = [
     path('seasonal_menu/', seasonal_menu),
     path('banquet_menu/', banquet_menu),
     path('wine_map/', wine_map),
-    path('alcoholic/', Alcoholic),
+    path('alcoholic/', Alcoholic.as_view()),
     path('beverages/', Beverages),
     path('about_as/', about_as),
     path('videos/', videos),
     path('videos/', include('youtube_downloader.urls')),
     # path('download_video/', download_video),
     path('video/', include('youtube_downloader.urls')),
+    path('alcoholic/<int:pk>', Product.as_view(), name='product')
 ]
 
 
