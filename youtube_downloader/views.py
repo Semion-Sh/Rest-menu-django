@@ -1,12 +1,28 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
-from youtube_downloader.models import Manage
+from youtube_downloader.models import Manage, Review
 import ssl
 ssl._create_default_https_context = ssl._create_stdlib_context
 from django.views.generic import ListView, DeleteView, CreateView
-
-
+from .forms import Review
+# ----------------------------------
+# from sqlalchemy.orm import sessionmaker
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy import create_engine, MetaData
+# import psycopg2
+#
+# Base = declarative_base()
+# meta = MetaData()
+#
+#
+# engine = create_engine("postgresql+psycopg2://gvaoqrlriwfoad:055f19b677f01b0411151ab91809d03ff4007515e82a428cb9f4148d8badfa54@ec2-52-207-15-147.compute-1.amazonaws.com/dcl69hnioedc5p")
+# conn = engine.connect()
+#
+#
+# session = sessionmaker(bind=engine)
+# s = session()
+# -------------------------------------
 def main(request):
     return HttpResponse(render(request, 'youtube_downloader/index_.html'))
 
@@ -52,7 +68,22 @@ def Beverages(request):
 
 
 def about_as(request):
-    return HttpResponse(render(request, 'youtube_downloader/about_as_.html'))
+    if request.method == 'POST':
+        form = Review(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            feedback = Review(
+                name=form.cleaned_data['name'],
+                surname=form.cleaned_data['surname'],
+                review=form.cleaned_data['review'],
+                rating=form.cleaned_data['rating']
+            )
+            feedback.save()
+            return HttpResponseRedirect('/about_as')
+    form = Review()
+    return HttpResponse(render(request, 'youtube_downloader/about_as_.html', {
+        'form': form
+    }))
 
 
 def videos(request):
