@@ -5,7 +5,7 @@ from youtube_downloader.models import Manage, Review
 import ssl
 ssl._create_default_https_context = ssl._create_stdlib_context
 from django.views.generic import ListView, DeleteView, CreateView
-from .forms import Review
+from .forms import ReviewForm
 # ----------------------------------
 # from sqlalchemy.orm import sessionmaker
 # from sqlalchemy.ext.declarative import declarative_base
@@ -55,7 +55,7 @@ class Alcoholic(ListView):
     # allow_empty = False
     def get_queryset(self):
         # return super().get_queryset().filter(category=4)
-        return Manage.objects.filter(category=4)
+        return Manage.objects.filter(category=2)
 
 
 
@@ -69,18 +69,11 @@ def Beverages(request):
 
 def about_as(request):
     if request.method == 'POST':
-        form = Review(request.POST)
+        form = ReviewForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
-            feedback = Review(
-                name=form.cleaned_data['name'],
-                surname=form.cleaned_data['surname'],
-                review=form.cleaned_data['review'],
-                rating=form.cleaned_data['rating']
-            )
-            feedback.save()
+            form.save()
             return HttpResponseRedirect('/about_as')
-    form = Review()
+    form = ReviewForm()
     return HttpResponse(render(request, 'youtube_downloader/about_as_.html', {
         'form': form
     }))

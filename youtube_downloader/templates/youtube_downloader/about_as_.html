@@ -9,6 +9,9 @@
     <div>тел. +7 (499) 229-92-27</div>
     <div>email: vg-banket@mail.ru</div>
     <div>Почтовый адрес: 119049, Москва, Крымский вал, д.9, стр.20</div>
+    <br>
+    <form>
+    {% csrf_token %}
     {% for field in form %}
         <div class="form-style {% if field.errors %} errors {% endif %}">
             {{ field.label_tag }}
@@ -16,6 +19,6 @@
             {{ field }}
         </div>
     {% endfor %}
-
     <button class="button_form" type="submit">Отправить</button>
+    </form>
 {% endblock %}

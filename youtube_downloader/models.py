@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.utils.text import slugify
 
+
 class Category(models.Model):
     title = models.CharField(max_length=300)
 
@@ -29,8 +30,6 @@ class Manage(models.Model):
 
     def __str__(self):
         return self.title
-
-    # self.price, self.photo
 
     class Meta:
         ordering = ['title']
